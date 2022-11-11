@@ -34,7 +34,7 @@ if(isset($_POST['btnEnviar'])){
                 
 		//insert
 		mysqli_query($conecta, 
-		"INSERT INTO eventos 
+		"INSERT INTO roteiro
 		(nome,descricao, foto, datainicio, datatermino, horario, dias, preco, local, lancamento)	
 		VALUES (
 		'" . strtoupper(trim($_POST['txtnome'])) . "',
@@ -58,7 +58,7 @@ if(isset($_POST['btnEnviar'])){
         }
 		// update
 		mysqli_query($conecta, 
-		"UPDATE eventos SET
+		"UPDATE roteiro SET
 		nome = '" . strtoupper(trim($_POST['txtnome'])) . "' ,
 		descricao = '" . (trim($_POST['txtdescricao'])) . "' ,
         foto = '" . (trim($nomeArquivo)) . "' ,
@@ -83,7 +83,7 @@ if(isset($_POST['btnEnviar'])){
 
 
 if(!empty($_GET["PKID"])) {
-	$select = mysqli_query($conecta, "SELECT * FROM eventos WHERE PKID = " . base64_decode($_GET["PKID"]));
+	$select = mysqli_query($conecta, "SELECT * FROM roteiro WHERE PKID = " . base64_decode($_GET["PKID"]));
 	if(mysqli_num_rows($select) == 0) {
 		$type = base64_encode("alert-danger");
 		$msg = base64_encode("Nenhum roteiro foi encontrado!");

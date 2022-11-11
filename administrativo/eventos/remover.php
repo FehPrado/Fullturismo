@@ -15,7 +15,7 @@ if(empty($_GET["PKID"])) {
 	exit;
 }
 
-$query = mysqli_query($conecta, "DELETE FROM eventos WHERE PKID = " . base64_decode($_GET["PKID"]));
+$query = mysqli_query($conecta, "DELETE FROM roteiro WHERE PKID = " . base64_decode($_GET["PKID"]));
 
 if($query) {
 	$type = base64_encode("alert-success");
