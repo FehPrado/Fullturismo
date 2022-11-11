@@ -14,7 +14,7 @@ if(isset($_POST['btnCadastro'])){
         $data = implode('-', array_reverse(explode('/', $_POST['txtNascimento'])));
 
         $query = mysqli_query($conecta, 
-            "INSERT INTO usuario
+            "INSERT INTO usuarioweb
             (email, senha, nome, cpf, telefone, nascimento) 
             VALUES (
              '". trim($_POST['txtEmail']) ."',
@@ -141,7 +141,7 @@ include("administrativo/conexao.php");
 
  if(isset($_POST["txtEmailUser"])and isset($_POST["txtSenhaUser"])){
 	 
-	$query= mysqli_query($conecta,"SELECT * FROM usuario WHERE email ='". trim($_POST["txtEmailUser"])."' AND senha ='". trim($_POST["txtSenhaUser"]). "' LIMIT 1");
+	$query= mysqli_query($conecta,"SELECT * FROM usuarioweb WHERE email ='". trim($_POST["txtEmailUser"])."' AND senha ='". trim($_POST["txtSenhaUser"]). "' LIMIT 1");
 	
 	if(mysqli_num_rows($query) >= 1){
 		session_start();
