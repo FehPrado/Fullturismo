@@ -75,7 +75,7 @@
           <div class="column default-featured-column style-two col-lg-4 col-md-6 col-sm-12 col-xs-12">
             <article class="inner-box wow fadeInUp" data-wow-delay="0ms" data-wow-duration="1500ms">
               <figure class="image-box"> 
-                <img src="administrativo/evento/<?php echo $resultRoteiro['foto'] ?>"/></figure>
+                <img src="administrativo/roteiro/<?php echo $resultRoteiro['foto'] ?>"/></figure>
               <div class="content-box">
                 <div class="skill">
                   <div class="row">
@@ -123,7 +123,7 @@
           <div class="column default-featured-column style-two col-lg-4 col-md-6 col-sm-12 col-xs-12">
             <article class="inner-box wow fadeInUp" data-wow-delay="0ms" data-wow-duration="1500ms">
               <figure class="image-box"> 
-                <img src="administrativo/evento/<?php echo $resultRoteiro['foto'] ?>"/></figure>
+                <img src="administrativo/roteiro/<?php echo $resultRoteiro['foto'] ?>"/></figure>
               <div class="content-box">
                 <div class="skill">
                   <div class="row">

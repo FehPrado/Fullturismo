@@ -131,7 +131,7 @@ if(!isset($_SESSION['username'])){
                         <tbody>
                             <?php
 								include('../conexao.php');
-								$query = mysqli_query($conecta, "SELECT * FROM eventos ORDER BY nome") or die(mysqli_error());
+								$query = mysqli_query($conecta, "SELECT * FROM roteiro ORDER BY nome") or die(mysqli_error());
 								if(mysqli_num_rows($query) >= 1) {
 									while($result = mysqli_fetch_assoc($query)) {
 							?>
