@@ -4,7 +4,7 @@ include("conexao.php");
 
 if(isset($_POST["txtUsername"]) and isset($_POST["txtPassword"])){
 	
-	$query= mysqli_query($conecta,"SELECT * FROM usuario WHERE email ='". trim($_POST["txtUsername"])."' AND senha ='". trim($_POST["txtPassword"]). "' LIMIT 1");
+	$query= mysqli_query($conecta,"SELECT * FROM users WHERE email ='". trim($_POST["txtUsername"])."' AND password ='". trim($_POST["txtPassword"]). "' LIMIT 1");
 	
 	if(mysqli_num_rows($query) >= 1){
 		
@@ -12,9 +12,9 @@ if(isset($_POST["txtUsername"]) and isset($_POST["txtPassword"])){
 		
 		$result = mysqli_fetch_assoc($query);
 		
-		$_SESSION["username"] = $result['nome'];
-		$_SESSION["acesso"] = $result['acesso'];
-                $_SESSION['id']=$result['PKID'];
+		$_SESSION["username"] = $result['name'];
+		$_SESSION["is_admin"] = $result['is_admin'];
+                $_SESSION['id']=$result['id'];
 		
 		header('location: index.php');
 		exit;

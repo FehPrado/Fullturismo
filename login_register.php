@@ -4,24 +4,24 @@ include ("administrativo/conexao.php");
 ob_start();
 
 if(isset($_POST['btnCadastro'])){
-	if($_POST['txtSenha']==$_POST['txtSenhaConfirma']){
+	if($_POST['txtPassword']==$_POST['txtSenhaConfirma']){
        
     
         if(empty($_POST['email'])){
             echo "<script>alert('Campo Email em branco');</script>";
         }
 
-        $data = implode('-', array_reverse(explode('/', $_POST['txtNascimento'])));
+        $data = implode('-', array_reverse(explode('/', $_POST['txtBirth'])));
 
         $query = mysqli_query($conecta, 
-            "INSERT INTO usuarioweb
-            (email, senha, nome, cpf, telefone, nascimento) 
+            "INSERT INTO users
+            (email, password, name, cpf, phone, birth) 
             VALUES (
              '". trim($_POST['txtEmail']) ."',
-             '". trim($_POST['txtSenha']) ."',
-             '". strtoupper(trim($_POST['txtNome'])) ."',	
+             '". trim($_POST['txtPassword']) ."',
+             '". strtoupper(trim($_POST['txtName'])) ."',	
              '". strtoupper(trim($_POST['txtCPF'])) ."',	
-             '". trim($_POST['txtTelefone']) ."',	
+             '". trim($_POST['txtPhone']) ."',	
                      '". $data ."'    
                   )");
 
@@ -139,19 +139,18 @@ if(isset($_POST['btnCadastro'])){
 ob_start();
 include("administrativo/conexao.php");
 
- if(isset($_POST["txtEmailUser"])and isset($_POST["txtSenhaUser"])){
+ if(isset($_POST["txtEmail"])and isset($_POST["txtPassword"])){
 	 
-	$query= mysqli_query($conecta,"SELECT * FROM usuarioweb WHERE email ='". trim($_POST["txtEmailUser"])."' AND senha ='". trim($_POST["txtSenhaUser"]). "' LIMIT 1");
+	$query= mysqli_query($conecta,"SELECT * FROM users WHERE email ='". trim($_POST["txtEmail"])."' AND password ='". trim($_POST["txtPassword"]). "' LIMIT 1");
 	
 	if(mysqli_num_rows($query) >= 1){
 		session_start();
 		
 		$result = mysqli_fetch_assoc($query);
-		$_SESSION["pkid"] = $result['PKID'];
-		$_SESSION["usuario"] = $result['nome'];
-		$_SESSION["tipo"]="funcionario";
+		$_SESSION["id"] = $result['id'];
+		$_SESSION["users"] = $result['name'];
 		
-		header('location: usuario.php?PKID='. base64_encode($result["PKID"]));
+		header('location: usuario.php?id='. base64_encode($result["id"]));
 		exit;
 	}
  }
@@ -165,10 +164,10 @@ include("administrativo/conexao.php");
               <div class="tab_login_register">
                 <form class="login" name="frmlogin" method="post">
                   <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Email" name="txtEmailUser" required>
+                    <input type="text" class="form-control" placeholder="Email" name="txtEmail" required>
                   </div>
                   <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Senha" name="txtSenhaUser" required>
+                    <input type="password" class="form-control" placeholder="Senha" name="txtPassword" required>
                   </div>
                   <div class="form-group">
                     <button class="btn btn-login" type="submit" name="btnLogin">Login</button>
@@ -194,7 +193,7 @@ include("administrativo/conexao.php");
               <div class="tab_login_register">
                 <form class="login" name="frmcadastro" method="post">
                   <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Nome" name="txtNome" required>
+                    <input type="text" class="form-control" placeholder="Nome" name="txtName" required>
                   </div>
                  <div class="form-group">
                     <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control"  maxlength="8" placeholder="Nascimento" name="txtNascimento" required>
@@ -209,7 +208,7 @@ include("administrativo/conexao.php");
                     <input type="text" class="form-control" placeholder="Email" name="txtEmail" required>
                   </div>
                      <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Senha" name="txtSenha" required>
+                    <input type="text" class="form-control" placeholder="Senha" name="txtPassword" required>
                   </div>
                   <div class="form-group">
                     <input type="text" class="form-control" placeholder="Confirme sua senha" name="txtSenhaConfirma" required>

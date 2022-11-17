@@ -14,11 +14,11 @@ include("../conexao.php");
 //se clicar no botao enviar
 if(isset($_POST['btnEnviar'])){
     
-    if($_FILES["txtfoto"]["size"] > 0) {
-        $extensaoArquivo = end(explode('.',$_FILES["txtfoto"]["name"]));
-        $nomeArquivo = "fotos/".sha1(time().$_FILES["txtfoto"]["name"]).".".$extensaoArquivo;
+    if($_FILES["txtphoto"]["size"] > 0) {
+        $extensaoArquivo = end(explode('.',$_FILES["txtphoto"]["name"]));
+        $nomeArquivo = "photo/".sha1(time().$_FILES["txtphoto"]["name"]).".".$extensaoArquivo;
         
-        move_uploaded_file($_FILES["txtfoto"]["tmp_name"],$nomeArquivo);
+        move_uploaded_file($_FILES["txtphoto"]["tmp_name"],$nomeArquivo);
         
     } else {
         $nomeArquivo = $_POST["fotoAntiga"];
@@ -26,50 +26,50 @@ if(isset($_POST['btnEnviar'])){
     
 	if(base64_decode($_GET['ref'])=='NOVO') {
         
-        if($_POST['txtlancamento']=="on") { 
-          $lancamento="SIM";
+        if($_POST['txtlaunch']=="on") { 
+          $lancamento="YES";
         } else {
-          $lancamento="NAO"; 
+          $lancamento="NO"; 
         }
                 
 		//insert
 		mysqli_query($conecta, 
-		"INSERT INTO roteiro 
-		(nome,descricao, foto, datainicio, datatermino, horario, dias, preco, local, lancamento)	
+		"INSERT INTO itinerary 
+		(name, description, photo, start_date, end_date, time, days, price, place, launch)	
 		VALUES (
-		'" . strtoupper(trim($_POST['txtnome'])) . "',
-		'" . (trim($_POST['txtdescricao'])) . "',
+		'" . strtoupper(trim($_POST['txtname'])) . "',
+		'" . (trim($_POST['txtdescription'])) . "',
         '" . (trim($nomeArquivo)) . "',
-        '" . (trim($_POST['txtdatainicio'])) . "',
-        '" . (trim($_POST['txtdatatermino'])) . "',
-        '" . (trim($_POST['txthorario'])) . "',
-        '" . (trim($_POST['txtdias'])) . "',           
-        '" . (trim($_POST['txtpreco'])) . "',
-        '" . (trim($_POST['txtlocal'])) . "',
+        '" . (trim($_POST['txtstart_date'])) . "',
+        '" . (trim($_POST['txtend_date'])) . "',
+        '" . (trim($_POST['txttime'])) . "',
+        '" . (trim($_POST['txtdays'])) . "',           
+        '" . (trim($_POST['txtprice'])) . "',
+        '" . (trim($_POST['txtplace'])) . "',
         '" . (trim($lancamento)) . "'
 		)");
 		
 	} else {
 
-        if($_POST['txtlancamento']=="on") { 
+        if($_POST['txtlaunch']=="on") { 
           $lancamento="SIM";
         } else {
           $lancamento="NAO"; 
         }
 		// update
 		mysqli_query($conecta, 
-		"UPDATE roteiro SET
-		nome = '" . strtoupper(trim($_POST['txtnome'])) . "' ,
-		descricao = '" . (trim($_POST['txtdescricao'])) . "' ,
-        foto = '" . (trim($nomeArquivo)) . "' ,
-        datainicio = '" . (trim($_POST['txtdatainicio'])) . "' ,
-        datatermino = '" . (trim($_POST['txtdatatermino'])) . "' ,
-        horario = '" . (trim($_POST['txthorario'])) . "' ,
-        dias = '" . (trim($_POST['txtdias'])) . "' ,
-        preco = '" . (trim($_POST['txtpreco'])) . "' ,
-        local= '" . (trim($_POST['txtlocal'])) . "',
-        lancamento= '" . (trim($lancamento)) . "'
-		WHERE PKID = " . $_POST["PKID"]);
+		"UPDATE itinerary SET
+		name = '" . strtoupper(trim($_POST['txtname'])) . "' ,
+		description = '" . (trim($_POST['txtdescription'])) . "' ,
+                photo = '" . (trim($nomeArquivo)) . "' ,
+                start_date = '" . (trim($_POST['txtstart_date'])) . "' ,
+                end_date = '" . (trim($_POST['txtend_date'])) . "' ,
+                time = '" . (trim($_POST['txttime'])) . "' ,
+                days = '" . (trim($_POST['txtdays'])) . "' ,
+                price = '" . (trim($_POST['txtprice'])) . "' ,
+                place= '" . (trim($_POST['txtplacel'])) . "',
+                launch= '" . (trim($lancamento)) . "'
+		WHERE PKID = " . $_POST["id"]);
 		
 	}
 	
@@ -82,8 +82,8 @@ if(isset($_POST['btnEnviar'])){
 }
 
 
-if(!empty($_GET["PKID"])) {
-	$select = mysqli_query($conecta, "SELECT * FROM roteiro WHERE PKID = " . base64_decode($_GET["PKID"]));
+if(!empty($_GET["id"])) {
+	$select = mysqli_query($conecta, "SELECT * FROM itinerary WHERE id = " . base64_decode($_GET["id"]));
 	if(mysqli_num_rows($select) == 0) {
 		$type = base64_encode("alert-danger");
 		$msg = base64_encode("Nenhum roteiro foi encontrado!");
@@ -202,61 +202,61 @@ if(!empty($_GET["PKID"])) {
 
                                                 <div class="col-md-6">
                                                         <label>Titulo do Evento:</label>
-                                                        <input value="<?php echo $result["nome"]?>" type="text" name="txtnome" class="form-control" placeholder="Titulo">
+                                                        <input value="<?php echo $result["name"]?>" type="text" name="txtname" class="form-control" placeholder="Titulo">
                                                 </div>
                                                 
                                                 <div class="col-md-2">
                                                         <label>Data inicio:</label>
-                                                        <input value="<?php echo $result["datainicio"]?>" type="date" name="txtdatainicio" class="form-control" placeholder="10/10">
+                                                        <input value="<?php echo $result["start_date"]?>" type="date" name="txtstart_date" class="form-control" placeholder="10/10">
                                                 </div>
                                                 
                                                 <div class="col-md-2">
                                                         <label>Data Termino:</label>
-                                                        <input value="<?php echo $result["datatermino"]?>" type="date" name="txtdatatermino" class="form-control" placeholder="10/11">
+                                                        <input value="<?php echo $result["end_date"]?>" type="date" name="txtend_date" class="form-control" placeholder="10/11">
                                                 </div>
                                                 
                                                 <div class="col-md-2">
                                                         <label>Lançamento:</label>
-                                                        <input type="checkbox" name="txtlancamento" class="form-control" style="width:20px">
+                                                        <input type="checkbox" name="txtlaunch" class="form-control" style="width:20px">
                                                 </div>
                                                        
                                                        
                                           
                                                 <div class="col-md-6">
                                                         <label>Descrição:</label>
-                                                        <textarea type="text" name="txtdescricao" class="form-control" rows="4" placeholder="Detalhes"><?php echo $result["descricao"]?></textarea>
+                                                        <textarea type="text" name="txtdescription" class="form-control" rows="4" placeholder="Detalhes"><?php echo $result["description"]?></textarea>
                                                 </div>                                                
                     
                                                 
                                                 <div class="col-md-3">
                                                         <label>Horario:</label>
-                                                     <input value="<?php echo $result["horario"]?>" type="text" name="txthorario" class="form-control" placeholder="10:30 até 14:40">
+                                                     <input value="<?php echo $result["time"]?>" type="text" name="txttime" class="form-control" placeholder="10:30 até 14:40">
                                                 </div>
                                                 
                                                 <div class="col-md-3">
                                                         <label>Dias:</label>
-                                                        <input value="<?php echo $result["dias"]?>" type="text" name="txtdias" class="form-control" placeholder="Segunda/Terça/Quinta">
+                                                        <input value="<?php echo $result["days"]?>" type="text" name="txtdays" class="form-control" placeholder="Segunda/Terça/Quinta">
                                                 </div>
                                                 
                                                 <div class="col-md-6">
                                                         <label>Foto</label>
-                                                        <input type="file" name="txtfoto" class="form-control">
-                                                        <input type="hidden" name="fotoAntiga" value="<?php echo $result["foto"]?>" class="form-control">
+                                                        <input type="file" name="txtphoto" class="form-control">
+                                                        <input type="hidden" name="fotoAntiga" value="<?php echo $result["photo"]?>" class="form-control">
                                                 </div>
                                                 
                                                 <div class="col-md-6">
                                                         <label>Preço:</label>
-                                                        <input value="<?php echo $result["preco"]?>" type="text" name="txtpreco" class="form-control">
+                                                        <input value="<?php echo $result["price"]?>" type="text" name="txtprice" class="form-control">
                                                 </div>
                                                
                                                 
                                                 <div class="col-md-4">
                                                         <label>Local:</label>
-                                                        <input value="<?php echo $result["local"]?>" type="text" name="txtlocal" class="form-control" placeholder="Endereço">
+                                                        <input value="<?php echo $result["place"]?>" type="text" name="txtplace" class="form-control" placeholder="Endereço">
                                                 </div>
                                         
                                         
-                                                <input type="hidden" name="PKID" value="<?php echo $result["PKID"]?>">
+                                                <input type="hidden" name="id" value="<?php echo $result["id"]?>">
 
                                         </div>
                                         <br><br><br>
@@ -279,3 +279,4 @@ if(!empty($_GET["PKID"])) {
 
 </body>
 </html>
+
