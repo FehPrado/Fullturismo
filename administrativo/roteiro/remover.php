@@ -10,12 +10,12 @@ if(!isset($_SESSION['username'])){
 
 include('../conexao.php');
 
-if(empty($_GET["PKID"])) {
+if(empty($_GET["id"])) {
 	header('Location: ./');
 	exit;
 }
 
-$query = mysqli_query($conecta, "DELETE FROM roteiro WHERE PKID = " . base64_decode($_GET["PKID"]));
+$query = mysqli_query($conecta, "DELETE FROM itinerary WHERE id = " . base64_decode($_GET["id"]));
 
 if($query) {
 	$type = base64_encode("alert-success");

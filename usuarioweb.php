@@ -124,7 +124,7 @@ include('conexao.php');
 					</div>
 					<a href="usuarios/index.php"><i class="icon-user2"></i></a>
 					<?php
-						$queryUsuarios=mysqli_query($conecta, "SELECT COUNT(PKID) AS TotalUsers FROM usuario");
+						$queryUsuarios=mysqli_query($conecta, "SELECT COUNT(id) AS TotalUsers FROM users");
 						$resultUsuarios=mysqli_fetch_assoc($queryUsuarios);
 					?>
 					<span class="bottom-info bg-danger" style="background: black !important"><?php echo str_pad($resultUsuarios['TotalUsers'], 3, 0, STR_PAD_LEFT)?> Registro(s)</span>
@@ -229,7 +229,7 @@ include('conexao.php');
 					</div>
 					<a href="roteiro/index.php"><i class="icon-balloon"></i></a>
 					<?php
-						$queryProfissao=mysqli_query($conecta, "SELECT COUNT(PKID) AS TotalUsers FROM roteiro");
+						$queryProfissao=mysqli_query($conecta, "SELECT COUNT(id) AS TotalUsers FROM itinerary");
 						$resultProfissao=mysqli_fetch_assoc($queryProfissao);
 					?>
 					<span class="bottom-info bg-danger" style="background: black !important"><?php echo str_pad($resultProfissao['TotalUsers'], 3, 0, STR_PAD_LEFT)?> Registro(s)</span>

@@ -2,12 +2,12 @@
 include ('administrativo/conexao.php');
 session_start();
 
-if(!isset($_SESSION["usuario"])){
+if(!isset($_SESSION["users"])){
     header('Location: login/');
     exit;
 }
 
-$idusuarioweb=base64_decode($_GET['PKID']);
+$idusuarioweb=base64_decode($_GET['id']);
 
 ?>
 

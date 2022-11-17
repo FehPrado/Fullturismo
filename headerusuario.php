@@ -11,7 +11,7 @@
             <div class="main-menu">
               <nav>
                 <ul>
-                  <li class="active"><a href="usuario.php">Inicio</a>
+                  <li class="active"><a href="index.php">Inicio</a>
                     
                   </li>
                   <li><a href="login.php">Roteiros</a>
@@ -36,6 +36,7 @@
                     </ul>
                   </li>
                     <li><a href="login_register.php">Meus Dados</a> </li>
+                    <li><a href="logout.php">Sair</a> </li>
                 </ul>
               </nav>
             </div>
@@ -47,8 +48,11 @@
                   <div class="header-top-search search-box">
                     <form>
                       <input class="search-text" type="text"  placeholder="Search Here..." >
-                      <a class="" href="">Seja Bem Vindo,<?php echo $_SESSION['usuario'] ?>!</a>
+                      <a class="" href="">Seja Bem Vindo,<?php echo $_SESSION['users'] ?>!</a>
                     </form>
+                   
+                    </li>
+                  </ul>
                   </div>
                 </li>
                 
@@ -59,6 +63,7 @@
       </div>
     </div>
   </div>
+  
   <!-- mobile-menu-area start -->
   <div class="mobile-menu-area">
     <div class="container">

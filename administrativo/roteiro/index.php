@@ -130,28 +130,28 @@ if(!isset($_SESSION['username'])){
 	                    <tbody>
 							<?php
 								include('../conexao.php');
-								$query = mysqli_query($conecta, "SELECT * FROM roteiro ORDER BY nome") or die(mysqli_error());
+								$query = mysqli_query($conecta, "SELECT * FROM itinerary ORDER BY price") or die(mysqli_error());
 								if(mysqli_num_rows($query) >= 1) {
 									while($result = mysqli_fetch_assoc($query)) {
 							?>
 								<tr>
-									<td><?php echo $result['nome'] ?></td>
-									<td><?php echo $result['descricao'] ?></td>
-									<td><?php echo $result['datainicio'] ?></td>
-                                                                        <td><?php echo $result['datatermino'] ?></td>
-                                                                        <td><?php echo $result['dias'] ?></td>
-                                                                        <td><?php echo $result['horario'] ?></td>                                                                  
-                                                                        <td><?php echo $result['preco'] ?></td>
+									<td><?php echo $result['name'] ?></td>
+									<td><?php echo $result['description'] ?></td>
+									<td><?php echo $result['start_date'] ?></td>
+                                    <td><?php echo $result['end_date'] ?></td>
+                                    <td><?php echo $result['days'] ?></td>
+                                    <td><?php echo $result['time'] ?></td>
+                                    <td><?php echo $result['price'] ?></td>                                                                  
 									<td class='text-center'>
 										<div class='btn-group'>
 											
 											<ul>
-                                                 <li><a href="alterar.php?PKID=<?php echo base64_encode($result['PKID']) ?>"><i class='icon-remove'></i> Alterar</a></li>
+                                                 <li><a href="alterar.php?id=<?php echo base64_encode($result['id']) ?>"><i class='icon-remove'></i> Alterar</a></li>
 												
 												
 											</ul>
                                                                                        
-                                                <li><a href='javascript:void(0)' onclick="if (confirm('Confirma exclusão do item?')) { location.href='remover.php?PKID=<?php echo base64_encode($result['PKID'])?>' }"><i class='icon-remove'></i> Remover</a></li>
+                                                <li><a href='javascript:void(0)' onclick="if (confirm('Confirma exclusão do item?')) { location.href='remover.php?id=<?php echo base64_encode($result['id'])?>' }"><i class='icon-remove'></i> Remover</a></li>
                                                 
                                             
 										</div>

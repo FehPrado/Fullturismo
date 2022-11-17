@@ -50,7 +50,7 @@
 
 		            <?php if($nivelTela==0){ ?>
 		            <li <?php echo $paginaAtiva == 'home' ? 'class="active"' : '';?>><a href="."><span>Página Inicial</span> <i class="icon-screen2"></i></a></li>
-		            <?php if($_SESSION['acesso']=='TOTAL'){ ?>
+		            <?php if($_SESSION['is_admin']=='TOTAL'){ ?>
 
 		            <li <?php echo $paginaAtiva == 'localização' ? 'class="active"' : '';?>><a href="#"><span>Localização</span> <i class="icon-users"></i></a>
 
@@ -99,7 +99,7 @@
 		            <?php if($nivelTela==1){ ?>
 		            <li <?php echo $paginaAtiva == 'home' ? 'class="active"' : '';?>><a href="../index.php"><span>Página Inicial</span> <i class="icon-screen2"></i></a></li>
 
-		            <?php if($_SESSION['acesso']=='TOTAL'){ ?>
+		            <?php if($_SESSION['is_admin']=='TOTAL'){ ?>
 
 		            <li <?php echo $paginaAtiva == 'localização' ? 'class="active"' : '';?>><a href="#"><span>Localização</span> <i class="icon-users"></i></a>
 
