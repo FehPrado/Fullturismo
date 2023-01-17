@@ -3,7 +3,50 @@
 include ("administrativo/conexao.php");
 ob_start();
 
+if(isset($_POST['btnCadastro'])){
+	if($_POST['txtPassword']==$_POST['txtSenhaConfirma']){
+       
+    
+        if(empty($_POST['txtEmail'])){
+            echo "<script>alert('Campo Email em branco');</script>";
+        }
+
+        $data = implode('-', array_reverse(explode('/', $_POST['txtBirth'])));
+
+        $query = mysqli_query($conecta, 
+            "INSERT INTO users
+            (email, password, name, cpf, phone, birth) 
+            VALUES (
+             '". trim($_POST['txtEmail']) ."',
+             '". trim($_POST['txtPassword']) ."',
+             '". strtoupper(trim($_POST['txtName'])) ."',	
+             '". strtoupper(trim($_POST['txtCPF'])) ."',	
+             '". trim($_POST['txtPhone']) ."',	
+                     '". $data ."'    
+                  )");
+
+
+
+        if($query){
+            echo "<script>alert('Você Realizou seu cadastro com sucesso!');</script>";														   
+            header('Location: login_register.php');
+            exit;
+          } else {
+            echo "<script>alert('Erro ao efetuar cadastro');</script>";
+        }
+
+    } else {
+        
+        echo "<script>alert('Erro ao efetuar cadastro');history.back(-1)</script>";
+
+    }
+    
+	
+ } 
+
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -80,8 +123,8 @@ ob_start();
           <ul class="nav nav-tabs" role="tablist">
               
             
-            <li role="presentation" class="active"><a href="#t-one-first" aria-controls="t-one-first" role="tab" data-toggle="tab" aria-expanded="true">Login</a></li>   
-            <li role="presentation" class=""><a href="register.php">Cadastrar</a></li>
+            <li role="presentation" class="active"><a href="login_register.php">Login</a></li>   
+
 
 
           </ul>
