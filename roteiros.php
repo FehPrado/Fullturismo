@@ -64,13 +64,14 @@
           
           <?php
           include ("administrativo/conexao.php");
-              $buscaRoteiro=mysqli_query($conecta, "SELECT * FROM itinerary WHERE launch = 'SIM' ");
+              $buscaRoteiro=mysqli_query($conecta, "SELECT * FROM itinerary WHERE launch = 'YES' ");
+              var_dump($buscaRoteiro);
                  while($resultRoteiro=mysqli_fetch_assoc($buscaRoteiro)){
          
       ?>   
          
                            
-  <h4 class="title"><a href="roteiros.php?ref=<?php echo base64_encode($resultRoteiro['id']) ?>"></a></h4>
+
         
           <div class="column default-featured-column style-two col-lg-4 col-md-6 col-sm-12 col-xs-12">
             <article class="inner-box wow fadeInUp" data-wow-delay="0ms" data-wow-duration="1500ms">
@@ -84,9 +85,9 @@
                 </div>
 
 
-                <h3><a href="roteiros.php?ref=<?php echo $resultRoteiro['id'] ?>"><?php echo $resultRoteiro['name'] ?></a></h3>
+                <h3><a href="roteirosinfo.php?ref=<?php echo base64_encode($resultRoteiro['id']) ?>"><?php echo $resultRoteiro['name'] ?></a></h3>
                 <p><?php echo $resultRoteiro['descriptrion'] ?></p>
-                <a href="product-case_1.php" class="theme-btn btn-style-orange">Read More <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                <a href="roteirosinfo.php?ref=<?php echo base64_encode($resultRoteiro['id']) ?>" class="theme-btn btn-style-orange">Read More <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
             </article>
           </div>
         <?php } ?>
@@ -112,7 +113,7 @@
           
           <?php
           include ("administrativo/conexao.php");
-              $buscaRoteiro=mysqli_query($conecta, "SELECT * FROM itinerary WHERE launch = 'NAO' ");
+              $buscaRoteiro=mysqli_query($conecta, "SELECT * FROM itinerary WHERE launch = 'NO' ");
                  while($resultRoteiro=mysqli_fetch_assoc($buscaRoteiro)){
          
       ?>   
@@ -132,9 +133,9 @@
                 </div>
 
 
-                <h3><a href="roteiros.php?ref=<?php echo $resultRoteiro['id'] ?>"><?php echo $resultRoteiro['name'] ?></a></h3>
+                <h3><a href="roteirosinfo.php?ref=<?php echo base64_encode($resultRoteiro['id']) ?>"><?php echo $resultRoteiro['name'] ?></a></h3>
                 <p><?php echo $resultRoteiro['description'] ?></p>
-                <a href="product-case_1.php" class="theme-btn btn-style-orange">Read More <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                <a href="roteirosinfo.php?ref=<?php echo base64_encode($resultRoteiro['id']) ?>" class="theme-btn btn-style-orange">Read More <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
             </article>
           </div>
         <?php } ?>

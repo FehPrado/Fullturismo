@@ -7,7 +7,7 @@ if(isset($_POST['btnCadastro'])){
 	if($_POST['txtPassword']==$_POST['txtSenhaConfirma']){
        
     
-        if(empty($_POST['email'])){
+        if(empty($_POST['txtEmail'])){
             echo "<script>alert('Campo Email em branco');</script>";
         }
 
@@ -31,7 +31,8 @@ if(isset($_POST['btnCadastro'])){
             echo "<script>alert('Você Realizou seu cadastro com sucesso!');</script>";														   
             header('Location: login_register.php');
             exit;
-        } else {
+          } else {
+          echo mysqli_errno($query);
             echo "<script>alert('Erro ao efetuar cadastro');</script>";
         }
 
@@ -196,13 +197,13 @@ include("administrativo/conexao.php");
                     <input type="text" class="form-control" placeholder="Nome" name="txtName" required>
                   </div>
                  <div class="form-group">
-                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control"  maxlength="8" placeholder="Nascimento" name="txtNascimento" required>
+                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control"  maxlength="8" placeholder="Nascimento" name="txtBirth" required>
                   </div>
                 <div class="form-group">
                     <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control"  maxlength="11" placeholder="CPF" name="txtCPF" required>
                   </div>
                     <div class="form-group">
-                    <input class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" maxlength="11" placeholder="Telefone" name="txtTelefone" required>
+                    <input class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" maxlength="11" placeholder="Telefone" name="txtPhone" required>
                   </div>
                   <div class="form-group">
                     <input type="text" class="form-control" placeholder="Email" name="txtEmail" required>

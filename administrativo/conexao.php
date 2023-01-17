@@ -13,8 +13,7 @@ if (!$conecta){
 //$conecta = mysqli_connect('localhost', 'root', '') or die(mysqli_error());
 //mysqli_select_db($conecta, 'projeto_epi');
 
-$conecta = mysqli_connect('localhost', 'root', '') or die(mysqli_error());
-
+$conecta = mysqli_connect('localhost', 'root', '123456789');
 mysqli_select_db($conecta, 'fullturismo');
 
 ?>
